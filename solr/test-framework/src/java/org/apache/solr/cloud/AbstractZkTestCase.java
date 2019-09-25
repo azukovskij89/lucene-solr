@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.lang.invoke.MethodHandles;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,12 +56,12 @@ public abstract class AbstractZkTestCase extends SolrTestCaseJ4 {
   
   protected static ZkTestServer zkServer;
 
-  protected static String zkDir;
+  protected static Path zkDir;
 
 
   @BeforeClass
   public static void azt_beforeClass() throws Exception {
-    zkDir = createTempDir("zkData").toFile().getAbsolutePath();
+    zkDir = createTempDir("zkData");
     zkServer = new ZkTestServer(zkDir);
     zkServer.run();
     

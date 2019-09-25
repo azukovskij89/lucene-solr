@@ -16,8 +16,12 @@
  */
 package org.apache.solr.cloud;
 
+import static java.util.concurrent.TimeUnit.*;
+
 import java.io.File;
 import java.lang.invoke.MethodHandles;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -38,9 +42,6 @@ import org.apache.zookeeper.KeeperException;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 public abstract class AbstractDistribZkTestBase extends BaseDistributedSearchTestCase {
   
@@ -64,8 +65,8 @@ public abstract class AbstractDistribZkTestBase extends BaseDistributedSearchTes
   public void distribSetUp() throws Exception {
     super.distribSetUp();
     
-    String zkDir = testDir.getAbsolutePath() + File.separator
-    + "zookeeper/server1/data";
+    Path zkDir = FileSystems.getDefault().getPath(testDir.getAbsolutePath() + File.separator
+    + "zookeeper/server1/data");
     zkServer = new ZkTestServer(zkDir);
     zkServer.run();
     

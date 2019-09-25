@@ -178,8 +178,8 @@ public class ZkCLI {
       
       SolrZkServer zkServer = null;
       if (solrPort != null) {
-        zkServer = new SolrZkServer("true", null, solrHome + "/zoo_data",
-            solrHome, Integer.parseInt(solrPort));
+        zkServer = new SolrZkServer("true", null, new File(solrHome, "/zoo_data"),
+                  solrHome, Integer.parseInt(solrPort));
         zkServer.parseConfig();
         zkServer.start();
       }
